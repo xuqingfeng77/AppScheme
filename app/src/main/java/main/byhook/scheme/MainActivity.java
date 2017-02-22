@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String SCHEME_DOMAIN = "scheme_activity";
+    private static final String SCHEME_DOMAIN = "goods:8888";
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -31,15 +31,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initView();
+        Uri uri = getIntent().getData();
+        if (uri != null) {
+            dispatchUri(uri);
+        } else {
+            Log.e(TAG, "Uri is null");
+        }
     }
 
     private void initView() {
         mTvDomain = (TextView) findViewById(R.id.tv_domain);
-        mTvDomain.setText(Html.fromHtml("<a href='andy://domain/path?params'>点我试试</a>"));
+        mTvDomain.setText(Html.fromHtml("<a href='xl://goods:8888/goodsDetail?params'>点我试试</a>"));
         mTvDomain.setMovementMethod(LinkMovementMethod.getInstance());
 
         mTvParam = (TextView) findViewById(R.id.tv_param);
-        mTvParam.setText(Html.fromHtml("<a href='andy://scheme_activity?type=0&buffer=这是个字符串'>点我一下</a>"));
+        mTvParam.setText(Html.fromHtml("<a href='xl://goods:8888/goodsDetail?type=0&buffer=这是个字符串'>点我一下</a>"));
         mTvParam.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
